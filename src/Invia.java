@@ -1,10 +1,11 @@
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
 
-public class Invia implements Runnable {
+public class Invia {
     private DatagramSocket socket;
     private InetAddress ip; //InetAddress è il tipo per gli indirizzi ip
     private byte[] data;
@@ -32,8 +33,8 @@ public class Invia implements Runnable {
         }
     }
 
-    @Override
-    public void run() {
+    //@Override
+    /*public void run() {
         String msg = "";
         do {
             InputStreamReader input = new InputStreamReader(System.in);
@@ -44,5 +45,5 @@ public class Invia implements Runnable {
             }
             this.sendPacket(msg);
         } while (true);
-    }
+    }*/
 }

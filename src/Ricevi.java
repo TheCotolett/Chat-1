@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.IOException;
 import java.net.*;
 
@@ -5,10 +6,12 @@ public class Ricevi implements Runnable {
     private DatagramSocket socket;
     private InetAddress ip; //InetAddress è il tipo per gli indirizzi ip
     private byte[] data = new byte[256];
+    JFrame frame;
 
-    public Ricevi(int port) throws SocketException, UnknownHostException {
+    public Ricevi(int port, JFrame frame) throws SocketException, UnknownHostException {
         this.socket = new DatagramSocket(port);
         this.ip = InetAddress.getByName("localhost");
+        this.frame=frame;
     }
 
     public void receivePacket() throws IOException {
@@ -19,6 +22,7 @@ public class Ricevi implements Runnable {
         // Convertire da byte[] a String e stampa
         String received = new String(packet.getData(), 0, packet.getLength());
         System.out.println("[Ricevuto]: " + received);
+
     }
 
     @Override
