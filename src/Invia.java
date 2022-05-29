@@ -1,18 +1,15 @@
-import javax.swing.*;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
 
 public class Invia {
-    private DatagramSocket socket;
+    private DatagramSocket socket; // Socket per la gestione dei pacchetti UDP
     private InetAddress ip; //InetAddress è il tipo per gli indirizzi ip
-    private byte[] data;
+    private byte[] data; // Array per i dati del pacchetto
     private int port;
 
     public Invia(int port) throws SocketException, UnknownHostException {
-        this.socket = new DatagramSocket();
+        this.socket = new DatagramSocket(); // Inizializzazione del socket con la porta
         this.ip = InetAddress.getByName("localhost");
         if (port == 5555)
             this.port = 6666;
@@ -20,9 +17,10 @@ public class Invia {
             this.port = 5555;
     }
 
+    // Metodo per inviare il pacchetto
     public void sendPacket(String msg) {
         if (msg != null) {
-            data = msg.getBytes(StandardCharsets.UTF_8); // Convertire da stringa a byte[]
+            data = msg.getBytes(StandardCharsets.UTF_8); // Conversione da stringa a byte[]
             // Creazione del pacchetto con ip, porta e il messaggio
             DatagramPacket packet = new DatagramPacket(data, data.length, ip, port);
             // Invio del pacchetto
@@ -32,18 +30,4 @@ public class Invia {
             }
         }
     }
-
-    //@Override
-    /*public void run() {
-        String msg = "";
-        do {
-            InputStreamReader input = new InputStreamReader(System.in);
-            BufferedReader read = new BufferedReader(input);
-            try {
-                msg = read.readLine();
-            } catch (IOException e) {
-            }
-            this.sendPacket(msg);
-        } while (true);
-    }*/
 }

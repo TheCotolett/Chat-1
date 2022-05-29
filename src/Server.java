@@ -1,21 +1,15 @@
-import javax.swing.*;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
 public class Server {
     public static void main(String[] args) throws SocketException, UnknownHostException {
-        int port = 6666;
+        int port = 6666; // Porta del client
 
-        JFrame frame = new ChatGUI("Server", port);
-        frame.setVisible(true);
+        ChatGUI frame = new ChatGUI("Server", port); // Creazione della GUI passando la porta
+        frame.setVisible(true); // Rende la GUI visibile
 
-        //Invia invia = new Invia(port);
-        Ricevi ricevi = new Ricevi(port, frame);
-
-        //Thread threadInvia = new Thread(invia);
-        Thread threadRicevi = new Thread(ricevi);
-
-        threadRicevi.start();
-        //threadInvia.start();
+        Ricevi ricevi = new Ricevi(port, frame); // Inizializzazione della classe Ricevi
+        Thread threadRicevi = new Thread(ricevi); // Creazione del Thread
+        threadRicevi.start(); // Avvio del Thread
     }
 }
